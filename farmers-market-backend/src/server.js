@@ -24,7 +24,6 @@ farmapp.get('/api/farmers-market/state', async(req, res) => {
             states.push(getStateResponse(stateInfo[index]));
 
         //console.log(states);
-
         res.status(200).json(states);
         client.close();
     } catch(error){
@@ -43,13 +42,18 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
         const locations = await db.collection("locations").find({State: farmerState}).toArray();
 
         var markets = [];
-        var i;
-        for(i=0; i<locations.length; i++)
-            markets.push(getMarketResponse(locations[i].MarketName, locations[i].Website, 
-                locations[i].street, locations[i].city, locations[i].zip, locations[i].x, locations[i].y));
-
+        var index;
+        for(index=0; index<locations.length; index++)
+            markets.push(getMarketResponse(
+                locations[index].MarketName, 
+                locations[index].Website, 
+                locations[index].street, 
+                locations[index].city, 
+                locations[index].zip, 
+                locations[index].x, 
+                locations[index].y)
+            );
         //console.log(markets);
-
         res.status(200).json(markets);
         client.close();
     } catch(error){
