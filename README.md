@@ -7,7 +7,7 @@ This folder contains the user interface developed using React. [Material UI](htt
 
 ## farmers-market-backend
 
-This folder contains the backend code developed with Express framework for Nodejs. The backend interacts with a MongoDB where the farmers market locations and addresses are stored. The backend API endpoints are invoked by the frontend fetch farmers market information.
+This folder contains the backend code developed with [Express](https://expressjs.com/) framework for Nodejs. The backend interacts with a MongoDB where the farmers market locations and addresses are stored. The backend API endpoints are invoked by the frontend fetch farmers market information.
 
 ## User Guide
 

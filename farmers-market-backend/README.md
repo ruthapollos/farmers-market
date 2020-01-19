@@ -21,5 +21,5 @@ Downloads the dependencies of the project
 ### `npx babel-node src/server.js`
 
 Runs the server in the development mode.<br />
-The endpoints are exposed in [http://localhost:8000/api/farmers-market/*](http://localhost:8000) 
+The REST endpoints are exposed in [http://localhost:8000/api/farmers-market/*](http://localhost:8000) 
 
