@@ -44,14 +44,16 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
         var markets = [];
         var index;
         for(index=0; index<locations.length; index++)
-            markets.push(getMarketResponse(
-                locations[index].MarketName, 
-                locations[index].Website, 
-                locations[index].street, 
-                locations[index].city, 
-                locations[index].zip, 
-                locations[index].x, 
-                locations[index].y)
+            markets.push(
+                getMarketResponse(
+                    locations[index].MarketName, 
+                    locations[index].Website, 
+                    locations[index].street, 
+                    locations[index].city, 
+                    locations[index].zip, 
+                    locations[index].x, 
+                    locations[index].y
+                )
             );
         //console.log(markets);
         res.status(200).json(markets);

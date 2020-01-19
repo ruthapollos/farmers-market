@@ -56,8 +56,7 @@ class FarmMarketInfo extends React.Component {
         }
     }
     
-    async handleChange(event) {
-
+    handleChange(event) {
         try {
             // when the drop down is changed the market names are refreshed
             this.setState(() => ({
