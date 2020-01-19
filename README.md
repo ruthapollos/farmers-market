@@ -1,5 +1,5 @@
 # farmers-market
-An web application developed for using react and nodejs allowing users to find farmers markets in US.
+An web application developed for using  javascript and MongoDB and allows users to find farmers markets in US.
 
 ## farmers-market-frontend
 
@@ -7,7 +7,7 @@ This folder contains the user interface developed using React. [Material UI](htt
 
 ## farmers-market-backend
 
-This folder contains the backend code developed with nodejs and express. The backend exposes API endpoints which the frontend invokes to get data from a MongoDB database.
+This folder contains the backend code developed with Express framework for Nodejs. The backend interacts with a MongoDB where the farmers market locations and addresses are stored. The backend API endpoints are invoked by the frontend fetch farmers market information.
 
 ## User Guide
 

@@ -7,7 +7,7 @@ This project uses express to expose API endpoints. This module interacts with a 
 + Download and install [MongoDB](https://www.mongodb.com/download-center)
 + If using Mac OS, MongoDB can be installed using [Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 + Download data of farmers markets in the US from this [link](https://catalog.data.gov/dataset/farmers-markets-geographic-data)
-+ Load the downloaded data into the MongoDB (Using a tool like Studio 3T)
++ Load the downloaded data into the MongoDB (Using a tool like Studio 3T allows to import data from csv to MongoDB)
 
 
 ### Available Scripts
