@@ -15,7 +15,7 @@ farmapp.get('/api/farmers-market/state', async(req, res) => {
     try {
         const client = await MongoClient.connect(config.database.url, 
                 {useNewUrlParser: true, useUnifiedTopology: true});
-        const db = client.db('farmers-market');
+        const db = client.db(config.database.name);
         const stateInfo = await db.collection("locations").distinct("State");
         console.log(stateInfo);
         var states = [];
@@ -23,7 +23,7 @@ farmapp.get('/api/farmers-market/state', async(req, res) => {
         for(index=0; index<stateInfo.length; index++)
             states.push(getStateResponse(stateInfo[index]));
 
-        console.log(states);
+        //console.log(states);
 
         res.status(200).json(states);
         client.close();
@@ -39,7 +39,7 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
         const farmerState = req.params.state;
         const client = await MongoClient.connect(config.database.url, 
                 {useNewUrlParser: true, useUnifiedTopology: true});
-        const db = client.db('farmers-market');
+        const db = client.db(config.database.name);
         const locations = await db.collection("locations").find({State: farmerState}).toArray();
 
         var markets = [];
@@ -48,7 +48,7 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
             markets.push(getMarketResponse(locations[i].MarketName, locations[i].Website, 
                 locations[i].street, locations[i].city, locations[i].zip, locations[i].x, locations[i].y));
 
-        console.log(markets);
+        //console.log(markets);
 
         res.status(200).json(markets);
         client.close();

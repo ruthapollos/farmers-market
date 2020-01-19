@@ -12,14 +12,12 @@ const styles = theme => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: '50%',
-      },
-      selectEmpty: {
-        marginTop: theme.spacing(2),
-      },
+    },
   });
 
 class FarmMarketInfo extends React.Component {
 
+    // initializing state variables in constructor
     constructor(props) {
         super(props);
         this.state = { 
@@ -33,6 +31,7 @@ class FarmMarketInfo extends React.Component {
     async componentDidMount(){
     
         try {
+            // fetching the State names and inititalizing the dropdown list
             var getStateReq = new Request(
                 'http://localhost:8000/api/farmers-market/State',
                 {
@@ -41,21 +40,17 @@ class FarmMarketInfo extends React.Component {
                 });
             const stateResponse = await fetch(getStateReq);
             const stateData = await stateResponse.json();
-            console.log(stateData);
-            this.setState({stateList: stateData, stateName: stateData[0].stateName});
+            //console.log(stateData);
+            this.setState({stateList: stateData});
+            
+            // initalizing the state name
+            if(this.state.stateName === '')
+                this.setState({stateName: stateData[0].stateName});
+            
+            // fetching the market name
+            if(this.state.stateName !== '')
+                this.fetchMarkets();
 
-            if(this.state.stateName != '') {
-                var getMarketsReq = new Request(
-                    `http://localhost:8000/api/farmers-market/${this.state.stateName}`,
-                    {
-                        method: 'get',
-                        mode: 'cors', // no-cors, *cors, same-origin
-                    });
-                const response = await fetch(getMarketsReq);
-                const data = await response.json();
-                console.log(data);
-                this.setState({markets: data, isLoading: false});
-            }
         } catch (error) {
             console.log(error);
         }
@@ -64,17 +59,29 @@ class FarmMarketInfo extends React.Component {
     async handleChange(event) {
 
         try {
-            this.setState({stateName: event.target.value});
+            // when the drop down is changed the market names are refreshed
+            this.setState(() => ({
+                stateName: event.target.value
+            }), () => {
+                this.fetchMarkets();
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
+    async fetchMarkets() {
+        try {
+            // fetching the farmers market names for a given state name
             var getMarketsReq = new Request(
-                `http://localhost:8000/api/farmers-market/${event.target.value}`,
+                `http://localhost:8000/api/farmers-market/${this.state.stateName}`,
                 {
                     method: 'get',
                     mode: 'cors', // no-cors, *cors, same-origin
                 });
             const response = await fetch(getMarketsReq);
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             this.setState({markets: data, isLoading: false});
         } catch (error) {
             console.log(error);
@@ -91,22 +98,20 @@ class FarmMarketInfo extends React.Component {
             <Grid container spacing={3}>
                 <Grid item xs={6}>
                 <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Please select your state</InputLabel>
+                    <InputLabel id="simple-select-label">Please select your state</InputLabel>
                     <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={stateName}
-                    onChange={this.handleChange.bind(this)}>
-                    {
-                        stateList.map((option) => {
-                            return (<MenuItem value={option.stateValue}>{option.stateName}</MenuItem>);
-                        })
-                    }
+                        labelId="simple-select-label"
+                        id="simple-select"
+                        value={stateName}
+                        onChange={this.handleChange.bind(this)}>{
+                            stateList.map((option) => { // rendering the dynamic drop down list
+                                return (<MenuItem value={option.stateValue}>{option.stateName}</MenuItem>);
+                            })
+                        }
                     </Select>
                 </FormControl>
                 </Grid>
                 <Grid item xs={6}>
-
                 </Grid>
                 <Grid item xs={12}>
                 <MaterialTable
@@ -126,8 +131,8 @@ class FarmMarketInfo extends React.Component {
                     options={{ pageSize: 10, loadingType: 'linear' }}
                     isLoading={isLoading}
                     detailPanel={rowData => {
-                        return (
-                            <iframe width="100%" height="315" id="gmap_canvas" 
+                        return ( // rendering the market location on a embedded Google map
+                            <iframe width="100%" height="315" id="gmap_canvas" title="market location"
                                 src={"https://maps.google.com/maps?q="+rowData.latitude+","+rowData.longitude+"&t=k&z=13&ie=UTF8&iwloc=&output=embed"}
                                 frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0">
                             </iframe>
