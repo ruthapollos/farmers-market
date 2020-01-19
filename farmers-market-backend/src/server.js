@@ -20,7 +20,7 @@ farmapp.get('/api/farmers-market/state', async(req, res) => {
         console.log(stateInfo);
         var states = [];
         var index;
-        for(index=0; index<stateInfo.length; index++)
+        for(index = 0; index < stateInfo.length; index++)
             states.push(getStateResponse(stateInfo[index]));
 
         //console.log(states);
@@ -43,7 +43,7 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
 
         var markets = [];
         var index;
-        for(index=0; index<locations.length; index++)
+        for(index = 0; index < locations.length; index++)
             markets.push(
                 getMarketResponse(
                     locations[index].MarketName, 
@@ -67,7 +67,7 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
 // helper function used to contruct the json response
 function getMarketResponse(marketName, website, street, city, zip, longitude, latitude){
     return {
-        marketname: marketName,
+        marketname : marketName,
         website : website,
         street : street,
         city : city,
@@ -80,8 +80,8 @@ function getMarketResponse(marketName, website, street, city, zip, longitude, la
 // helper function used to contruct the json response
 function getStateResponse(stateName){
     return {
-        stateName: stateName,
-        stateValue: stateName
+        stateName : stateName,
+        stateValue : stateName
      }
 }
 

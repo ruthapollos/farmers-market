@@ -1,6 +1,6 @@
 ## farmers-market-backend
 
-This project uses express to expose API endpoints. This module interacts with a locally installed MongoDB database to read data.
+This project uses [Express](https://expressjs.com/) framework for Nodejs to expose API endpoints. This module interacts with a locally installed MongoDB database to read data.
 
 ### Prerequisites
 
@@ -14,11 +14,11 @@ This project uses express to expose API endpoints. This module interacts with a 
 
 In the project directory, you can run:
 
-### `npm install`
+#### `npm install`
 
 Downloads the dependencies of the project
 
-### `npx babel-node src/server.js`
+#### `npx babel-node src/server.js`
 
 Runs the server in the development mode.<br />
 The REST endpoints are exposed in [http://localhost:8000/api/farmers-market/*](http://localhost:8000) 

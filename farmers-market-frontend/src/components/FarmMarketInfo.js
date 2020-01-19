@@ -93,7 +93,7 @@ class FarmMarketInfo extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div className = {classes.root}>
+            <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={6}>
                 <FormControl className={classes.formControl}>
@@ -122,12 +122,14 @@ class FarmMarketInfo extends React.Component {
                         { title: 'Zip', field: 'zip', type: 'numeric' },
                         {   title: 'Website', 
                             field: 'website', 
-                            render: rowData => <a href={rowData.website} target="_blank">
-                                    {rowData.website}</a>
+                            render: rowData => <a href={rowData.website} target="_blank">{rowData.website}</a>
                         },
                     ]}
                     data={markets}
-                    options={{ pageSize: 10, loadingType: 'linear' }}
+                    options={{ 
+                        pageSize: 10, 
+                        loadingType: 'linear' 
+                    }}
                     isLoading={isLoading}
                     detailPanel={rowData => {
                         return ( // rendering the market location on a embedded Google map
