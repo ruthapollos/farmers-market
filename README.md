@@ -1,5 +1,5 @@
 # farmers-market
-An web application developed for using  javascript and MongoDB and allows users to find farmers markets in US.
+An web application developed using javascript and MongoDB and allows users to find farmers markets in US. The directory in the application allows users to filter information and also zoom into the location of the farmers market. The User Guide section below shows how the application can be used.
 
 ## farmers-market-frontend
 
