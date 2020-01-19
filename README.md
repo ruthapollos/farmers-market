@@ -23,9 +23,13 @@ The home page displays a welcome message to the user
 
 The search page allows the user to select the State to look for farmers market and displays the markets
 
+![alt text](https://user-images.githubusercontent.com/60051474/72682570-a7233d80-3ace-11ea-8402-87c0ac618720.jpg)
+
+After the user selects the State, the farmers markets in the state are displayed. The user can further filter the results using the search field in the page.
+
 ![alt text](https://user-images.githubusercontent.com/60051474/72681163-2a3d9700-3ac1-11ea-99c5-c1dd9c2349a6.jpg)
 
-The details view in the table allows the user to view and zoom into the market in Google Maps
+The details view in the table diplays the market's location in an embedded Google map. The user can further zoom into the location of the market using Google map.
 
 ![alt text](https://user-images.githubusercontent.com/60051474/72681169-36c1ef80-3ac1-11ea-98d9-43ae2c77e66d.jpg)
 
