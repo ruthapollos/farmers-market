@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { MongoClient } from 'mongodb';
+import config from './config';
+
 
 const farmapp = express();
 var cors = require('cors')
@@ -11,7 +13,7 @@ farmapp.use(bodyParser.json());
 // this endpoint returns a unique list of states
 farmapp.get('/api/farmers-market/state', async(req, res) => {
     try {
-        const client = await MongoClient.connect('mongodb://localhost:27017', 
+        const client = await MongoClient.connect(config.database.url, 
                 {useNewUrlParser: true, useUnifiedTopology: true});
         const db = client.db('farmers-market');
         const stateInfo = await db.collection("locations").distinct("State");
@@ -35,16 +37,16 @@ farmapp.get('/api/farmers-market/state', async(req, res) => {
 farmapp.get('/api/farmers-market/:state', async(req, res) => {
     try {
         const farmerState = req.params.state;
-        const client = await MongoClient.connect('mongodb://localhost:27017', 
+        const client = await MongoClient.connect(config.database.url, 
                 {useNewUrlParser: true, useUnifiedTopology: true});
         const db = client.db('farmers-market');
-        const propArray = await db.collection("locations").find({State: farmerState}).toArray();
+        const locations = await db.collection("locations").find({State: farmerState}).toArray();
 
         var markets = [];
         var i;
-        for(i=0; i<propArray.length; i++)
-            markets.push(getStandardResponse(propArray[i].MarketName, propArray[i].Website, 
-                propArray[i].street, propArray[i].city, propArray[i].zip, propArray[i].x, propArray[i].y));
+        for(i=0; i<locations.length; i++)
+            markets.push(getMarketResponse(locations[i].MarketName, locations[i].Website, 
+                locations[i].street, locations[i].city, locations[i].zip, locations[i].x, locations[i].y));
 
         console.log(markets);
 
@@ -57,9 +59,9 @@ farmapp.get('/api/farmers-market/:state', async(req, res) => {
 })
 
 // helper function used to contruct the json response
-function getStandardResponse(marketname, website, street, city, zip, longitude, latitude){
+function getMarketResponse(marketName, website, street, city, zip, longitude, latitude){
     return {
-        marketname: marketname,
+        marketname: marketName,
         website : website,
         street : street,
         city : city,
@@ -69,6 +71,7 @@ function getStandardResponse(marketname, website, street, city, zip, longitude, 
      }
 }
 
+// helper function used to contruct the json response
 function getStateResponse(stateName){
     return {
         stateName: stateName,
