@@ -6,8 +6,7 @@ This project uses [Express](https://expressjs.com/) framework for Nodejs to expo
 
 + Download and install [MongoDB](https://www.mongodb.com/download-center)
 + If using Mac OS, MongoDB can be installed using [Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
-+ Download data of farmers markets in the US from this [link](https://catalog.data.gov/dataset/farmers-markets-geographic-data)
-+ Load the downloaded data into the MongoDB (Using a tool like Studio 3T allows to import data from csv to MongoDB easily)
++ Load the farmers market info to MongoDB using the import command - mongoimport -d farmers-market -c locations --type csv --file farmers_market.csv --headerline
 
 
 ### Available Scripts
